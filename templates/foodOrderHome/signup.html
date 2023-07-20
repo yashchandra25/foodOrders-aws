@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 text-center me-auto ms-auto">
+            <form method="post">
+                {% csrf_token %}
+                <div class="h1 mt-5">Signup</div>
+                {% for field in form %}
+                    <div class="form-control">
+                        <div class="m-2">
+                            {{ field.label_tag }}
+                        </div>
+                        <div class="m-2">
+                            {{ field }}
+                        </div>
+                        {% if field.help_text %}
+                        <small class="text-success">{{ field.help_text }}</small>
+                        {% endif %}
+                        <div>
+                            {% for error in field.error %}
+                            <small class="text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-sm btn-success">Signup</button>
+            </form>
+            <div class="m-2">
+                <span class="h4 text-primary">Already have an Account?</span>
+                <a href="{% url 'login' %}" class="h4 text-primary">Login Now!</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
